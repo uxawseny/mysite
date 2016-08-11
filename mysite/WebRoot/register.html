@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>用户注册异步校验</title>
+<style type="text/css">
+/* errorspan文字颜色 */
+span{
+    color:green;
+}
+
+</style>
+<script type="text/javascript">
+/* 创建异步对象 */
+ function createXMLHttpRequest(){
+	 try {
+			return new XMLHttpRequest();//大多数浏览器
+		} catch (e) {
+			try {
+				return ActvieXObject("Msxml2.XMLHTTP");//IE6.0
+			} catch (e) {
+				try {
+					return ActvieXObject("Microsoft.XMLHTTP");//IE5.5及更早版本	
+				} catch (e) {
+					alert("浏览器不支持！");
+					throw e;
+				}
+			}
+	}
+}
+
+ window.onload = function() {
+		// 获取文本框，给它的失去焦点事件注册监听
+		var userEle = document.getElementById("username");
+		userEle.onblur = function() {
+			//1.得到异步对象
+			var xmlHttp = createXMLHttpRequest();
+			//2.打开连接
+			xmlHttp.open("POST", "/mysite/registerServlet", true);
+			//3.设置请求头：Content-Type
+			xmlHttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+			//4.发送请求，给出请求体
+			xmlHttp.send("username=" + userEle.value);
+			
+			//5.给xmlHttp的onreadystatechange事件注册监听
+			xmlHttp.onreadystatechange = function() {
+				if(xmlHttp.readyState == 4 && xmlHttp.status == 200) {//双重判断
+					//获取服务器的响应，判断是否为1
+					// 是：获取span，添加内容：“用户名已被注册”
+					var text = xmlHttp.responseText;
+					var span = document.getElementById("errorspan");
+					if(text == "1") {
+						//得到span元素
+						span.innerHTML = "用户名已被注册！";
+					} else if(text == "0") {
+						span.innerHTML = "该用户名可用";
+					} else{
+						span.innerHTML = "";
+					}
+				}
+			};
+		};
+	};
+
+</script>
+
+
+</head>
+<body>
+<form method="POST" action="">
+	用户名：<input type="text" name="username" id="username"><!--  -->
+	<span id="errorspan" ></span><br /><!--  --> 
+	密&nbsp&nbsp码：<input type="text" name="password" id="password"><br /><!--  -->
+	<input type="submit" value="提交"><br /><!--  -->
+</form>
+	
+</body>
+</html>
