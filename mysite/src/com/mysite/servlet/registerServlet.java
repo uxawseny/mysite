@@ -21,7 +21,7 @@ public class registerServlet extends HttpServlet {
 		response.setContentType("text/html;charset=utf-8");
 		request.setCharacterEncoding("UTF-8");
 		String username=request.getParameter("username");
-		if(username.equalsIgnoreCase("xuw")){
+		if(username.equalsIgnoreCase("xww")){
 			response.getWriter().print("1");
 		}else if(!username.equalsIgnoreCase("")){
 			response.getWriter().print("0");
