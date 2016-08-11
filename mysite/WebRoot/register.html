@@ -4,13 +4,17 @@
 <meta charset="UTF-8">
 <title>用户注册异步校验</title>
 <style type="text/css">
-/* errorspan文字颜色 */
+
 span{
     color:green;
 }
 
 </style>
 <script type="text/javascript">
+
+
+
+
 /* 创建异步对象 */
  function createXMLHttpRequest(){
 	 try {
@@ -55,22 +59,45 @@ span{
 					} else if(text == "0") {
 						span.innerHTML = "该用户名可用";
 					} else{
-						span.innerHTML = "";
+						span.innerHTML = "用户名不能为空";
 					}
 				}
 			};
 		};
 	};
+	function checkForm(){
+		// 校验用户名:
+		// 获得用户名文本框的值:
+		var username = document.getElementById("username").value;
+		if(username == null || username == ''){
+			alert("用户名不能为空!");
+			return false;
+		}
+		// 校验密码:
+		// 获得密码框的值:
+		var password = document.getElementById("password").value;
+		if(password == null || password == ''){
+			alert("密码不能为空!");
+			return false;
+		}
+		// 校验确认密码:
+		var repassword = document.getElementById("repassword").value;
+		if(repassword != password){
+			alert("两次密码输入不一致!");
+			return false;
+		}
+	}
 
 </script>
 
 
 </head>
 <body>
-<form method="POST" action="">
-	用户名：<input type="text" name="username" id="username"><!--  -->
+<form id="registerForm" method="POST" action="" onsubmit="return checkForm();">
+	用户名:<input type="text" name="username" id="username"  size="20"><!--  -->
 	<span id="errorspan" ></span><br /><!--  --> 
-	密&nbsp&nbsp码：<input type="text" name="password" id="password"><br /><!--  -->
+	密&nbsp码:<input type="text" name="password" id="password"  size="20"><br /><!--  -->
+	确认密码:<input type="text" name="password" id="repassword" size="18"><br /><!--  -->
 	<input type="submit" value="提交"><br /><!--  -->
 </form>
 	
