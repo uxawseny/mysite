@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">  
+	<!-- 从官方下载的文件放在项目的 jquery-mobile 目录中 -->  
+	<link rel="stylesheet" href="js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.css"/>  
+	<link rel="stylesheet" href="js/jquery.mobile-1.4.5/jquery.mobile.structure-1.4.5.min.css"/>  
+	<script src="js/jquery.mobile-1.4.5/jquery-1.8.2.js"></script>  
+	<script src="js/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js"></script>  
+
+
+</head>
+<body>
+<script>  
+//显示加载器  
+function showLoader() {  
+    //显示加载器.for jQuery Mobile 1.2.0  
+    $.mobile.loading('show', {  
+        text: '加载中...', //加载器中显示的文字  
+        textVisible: true, //是否显示文字  
+        theme: 'c',        //加载器主题样式a-e  
+        textonly: false,   //是否只显示文字  
+        html: ""           //要显示的html内容，如图片等  
+    });  
+}  
+  
+//隐藏加载器.for jQuery Mobile 1.2.0  
+function hideLoader()  
+{  
+    //隐藏加载器  
+    $.mobile.loading('hide');  
+}  
+</script>
+<div data-role="page">  
+        <!-- 头部 -->  
+        <div data-role="header">  
+            <h3>Ajax测试</h3>  
+        </div>  
+        <!-- 内容 -->  
+        <div data-role="content">  
+            <h3>Ajax测试</h3>  
+              
+            <input type="button" value="显示ajax加载器" onclick="showLoader()"/>  
+            <input type="button" value="隐藏ajax加载器" onclick="hideLoader()"/>  
+              
+         </div>  
+</body>
+</html>
